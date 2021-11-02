@@ -5,16 +5,20 @@ import {Home} from './views/Home';
 import {ListarClientes} from './views/Cliente/Listar';
 import {ListarPedidos} from './views/Pedido/Listar';
 import {ListarServicos} from './views/Servico/Listar';
+import {Menu} from './components/Menu';
+import { AddCliente } from './views/Cliente/AddCliente';
 
 function App() {
   return (
     <div className="App">
      <Router>
+       <Menu/>
        <Switch>
          <Route exact path='/' component={Home}/>
-         <Route path='/listar-cliente' component={ListarClientes}/>
+         <Route path='/listar-clientes' component={ListarClientes}/>
          <Route path='/listar-pedidos' component={ListarPedidos}/>
          <Route path='/listar-servicos' component={ListarServicos}/>
+         <Route path='/novo-cliente' component={AddCliente}/>
        </Switch>
      </Router>
     </div>
