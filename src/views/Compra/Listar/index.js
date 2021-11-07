@@ -5,7 +5,7 @@ import { Container, Table, Alert } from "reactstrap";
 
 import { api } from "../../../config";
 
-export const ListarServicos = ()=>{
+export const ListarCompras = ()=>{
 
     const [data, setData] = useState([]);
 
@@ -14,11 +14,11 @@ export const ListarServicos = ()=>{
         message: ''
     });
 
-    const getServicos = async()=>{
-        await axios.get(api+'/listar-servicos')
+    const getCompras = async()=>{
+        await axios.get(api+'/listar-compras')
         .then((response)=>{
-            console.log(response.data.servicos);
-            setData(response.data.servicos);
+            console.log(response.data.compras);
+            setData(response.data.compras);
         }).catch(()=>{
             setStatus({
                 type: 'error',
@@ -28,23 +28,21 @@ export const ListarServicos = ()=>{
     };
 
     useEffect(()=>{
-        getServicos();
+        getCompras();
     },[]);
 
     return(
             <div>
                 <Container>
                     <div>
-                        <h1>Visualizar informações do serviço</h1>
+                        <h1>Visualizar Compras</h1>
                     </div>
                     {status.type == 'error' ? <Alert color='danger'> {status.message} </Alert> : ''} 
                     <Table striped>
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nome</th>
-                                <th>Descrição</th>
-                                <th>Ação</th>
+                                <th>Data da compra</th>
                             </tr>
                         </thead>
                         <tbody>

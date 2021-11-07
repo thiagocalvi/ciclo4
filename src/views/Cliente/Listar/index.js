@@ -1,10 +1,36 @@
-import { axios } from "axios";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { Container, Table, Alert } from "reactstrap";
 
 import { api } from "../../../config";
 
 export const ListarClientes = () => {
+
+    const [data, setData] = useState([]);
+
+    const [status, setStatus] = useState({
+        type: '',
+        message: ''
+    });
+
+    const getClientes = async () => {
+        await axios.get(api + '/listar-clientes')
+            .then((response) => {
+                console.log(response.data.clientes);
+                setData(response.data.clientes);
+            }).catch(() => {
+                setStatus({
+                    type: 'error',
+                    message: 'Erro: sem conexão com a API'
+                })
+            });
+    };
+
+    useEffect(() => {
+        getClientes();
+    }, []);
+
+
     return (
         <div className=''>
             <Container>
@@ -13,6 +39,8 @@ export const ListarClientes = () => {
                 </div>
                 <div>
                     <h1>Visualizar Clientes</h1>
+                    {status.type == 'error' ? <Alert color='danger'> {status.message} </Alert> : ''}
+                    <Table striped></Table>
                 </div>
                 <Table>
                     <thead>

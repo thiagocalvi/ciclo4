@@ -7,7 +7,8 @@ import {
     Nav,
     NavItem,
     NavLink,
-    Container
+    Container,
+    
 } from 'reactstrap';
 
 export const Menu = (props) => {
@@ -18,7 +19,7 @@ export const Menu = (props) => {
             <Navbar color='info' dark expand='md'>
                 <Container>
                     <NavbarBrand href='/'>TI Academy</NavbarBrand>
-                    <NavbarToggler onClick={toggle}/>
+                    <NavbarToggler onClick={toggle} />
                     <Collapse isOpen={isOpen} navbar>
                         <Nav className='mr-auto' navbar>
                             <NavItem>
@@ -29,5 +30,5 @@ export const Menu = (props) => {
                 </Container>
             </Navbar>
         </div>
-    );                  
+    );
 };

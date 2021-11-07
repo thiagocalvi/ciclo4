@@ -8,7 +8,7 @@ export const AddCliente = () => {
                 <div className='d-flex'>
                     <h1>Adicionar novo cliente</h1>
                 </div>
-                <div className=''>
+                <div>
                     <Form>
                         <FormGroup>
                             <Label for='nome'>
@@ -21,7 +21,7 @@ export const AddCliente = () => {
                             />
                         </FormGroup>
                         <FormGroup>
-                            <Label for='enderoco'>
+                            <Label for='endereco'>
                                 Endereço
                             </Label>
                             <Input
