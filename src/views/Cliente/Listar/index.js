@@ -54,12 +54,17 @@ export const ListarClientes = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <td>?</td>
-                        <td>?</td>
-                        <td>?</td>
-                        <td>?</td>
-                        <td>?</td>
-                        <td>?</td>
+                        {data.map(item=>(
+                            <tr key={item.id}>
+                            <td>{item.id}</td>
+                            <td>{item.nome}</td>
+                            <td>{item.endereco}</td>
+                            <td>{item.cidade}</td>
+                            <td>{item.uf}</td>
+                            <td>{item.nascimento}</td>
+                            </tr>
+                        ))}
+                        
                     </tbody>
                 </Table>
             </Container>

@@ -18,12 +18,14 @@ export const ListarServicos = ()=>{
         await axios.get(api+'/listar-servicos')
         .then((response)=>{
             console.log(response.data.servicos);
+            console.log(response);
             setData(response.data.servicos);
         }).catch(()=>{
             setStatus({
                 type: 'error',
                 message: 'Erro: sem conexão com a API'
             })
+            
         });
     };
 
@@ -48,7 +50,7 @@ export const ListarServicos = ()=>{
                             </tr>
                         </thead>
                         <tbody>
-                            {data.map(item =>(
+                            {data.map(item => (
                                 <tr key={item.id}>
                                     <td>{item.id}</td>
                                     <td>{item.nome}</td>

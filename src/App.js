@@ -6,11 +6,7 @@ import { ListarClientes } from './views/Cliente/Listar';
 import { ListarPedidos } from './views/Pedido/Listar';
 import { ListarServicos } from './views/Servico/Listar';
 import { Menu } from './components/Menu';
-import { AddCliente } from './views/Cliente/AddCliente';
 import { Item } from './views/Servico/Item';
-import { ListarCompras } from './views/Compra/Listar';
-import { ListarProdutos } from './views/Produto/Listar';
-import { AddProduto } from './views/Produto/AddProduto';
 
 
 function App() {
@@ -24,10 +20,7 @@ function App() {
           <Route path='/listar-pedidos' component={ListarPedidos} />
           <Route path='/listar-servicos' component={ListarServicos} />
           <Route path='/listar-pedido:id' component={Item} />
-          <Route path='/novo-cliente' component={AddCliente} />
-          <Route path='/listar-compras' component={ListarCompras}/>
-          <Route path='/listar-produtos' component={ListarProdutos}/>
-          <Route path='/novo-produto' component={AddProduto}/>
+          {/* <Route path='/novo-cliente' component={AddCliente} /> */}
         </Switch>
       </Router>
     </div>
