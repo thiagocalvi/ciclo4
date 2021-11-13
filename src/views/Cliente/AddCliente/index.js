@@ -1,23 +1,52 @@
 
+import axios from "axios";
 import { Input, Container, Form, FormGroup, Label, Button } from "reactstrap";
+import { api } from "../../../config";
 
 export const AddCliente = () => {
+
+    const [cliente, setCliente] = setCliente({
+        nome: '',
+        endereco: '',
+        cidade: '',
+        uf: '',
+        nascimento: ''
+    });
+
+    const valorInput = e => setCliente({ ...cliente, [e.target.nome]: e.target.value });
+
+    const cadCliente = async e => {
+        e.preventDefault();
+        const headers = {
+            'Content-type': 'application/json'
+        };
+        await axios.post(api + '/cliente', cliente, { headers })
+            .then((response) => {
+                console.log(response.data.message);
+            }).catch(() => {
+                console.log('Erro: sem conexão com API');
+            });
+    };
+
+
+
     return (
         <div>
             <Container>
                 <div className='d-flex'>
-                    <h1>Adicionar novo cliente</h1>
+                    <h1>Novo cliente</h1>
                 </div>
                 <div>
-                    <Form>
+                    <Form onSubmit={cadCliente}>
                         <FormGroup>
                             <Label for='nome'>
                                 Nome
                             </Label>
                             <Input
                                 id='nome'
-                                name='nomeCliente'
+                                name='nome'
                                 type='text'
+                                onChange={valorInput}
                             />
                         </FormGroup>
                         <FormGroup>
@@ -26,9 +55,10 @@ export const AddCliente = () => {
                             </Label>
                             <Input
                                 id='endereco'
-                                name='enderecoCliente'
+                                name='endereco'
                                 placeholder=''
                                 type='text'
+                                onChange={valorInput}
                             />
                         </FormGroup>
                         <FormGroup>
@@ -37,9 +67,10 @@ export const AddCliente = () => {
                             </Label>
                             <Input
                                 id='cidade'
-                                name='cidadeCliente'
+                                name='cidade'
                                 placeholder=''
                                 type='text'
+                                onChange={valorInput}
                             />
                         </FormGroup>
                         <FormGroup>
@@ -48,8 +79,9 @@ export const AddCliente = () => {
                             </Label>
                             <Input
                                 id='uf'
-                                name='ufCliente'
+                                name='uf'
                                 type='text'
+                                onChange={valorInput}
                             />
                         </FormGroup>
                         <FormGroup>
@@ -58,15 +90,19 @@ export const AddCliente = () => {
                             </Label>
                             <Input
                                 id='nascimento'
-                                name='nascimentoCliente'
+                                name='nascimento'
                                 type='date'
+                                onChange={valorInput}
                             />
                         </FormGroup>
                     </Form>
                 </div>
                 <div>
-                    <Button color='success' outline='treu' block='true'>
+                    <Button color='primery' outline type='submit'>
                         CRIAR CLIENTE
+                    </Button>
+                    <Button type='reset' autline color='primery'>
+                        Limpar
                     </Button>
                 </div>
             </Container>

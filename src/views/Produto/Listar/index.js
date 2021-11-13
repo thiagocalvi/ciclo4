@@ -5,7 +5,7 @@ import { Container, Table, Alert } from "reactstrap";
 
 import { api } from "../../../config";
 
-export const ListarClientes = () => {
+export const ListarProdutos = () => {
 
     const [data, setData] = useState([]);
 
@@ -14,11 +14,11 @@ export const ListarClientes = () => {
         message: ''
     });
 
-    const getClientes = async () => {
-        await axios.get(api + '/listar-clientes')
+    const getProdutos = async () => {
+        await axios.get(api + '/listar-produtos')
             .then((response) => {
-                console.log(response.data.cli);
-                setData(response.data.cli);
+                console.log(response.data.pro);
+                setData(response.data.pro);
             }).catch(() => {
                 setStatus({
                     type: 'error',
@@ -28,7 +28,7 @@ export const ListarClientes = () => {
     };
 
     useEffect(() => {
-        getClientes();
+        getProdutos();
     }, []);
 
 
@@ -37,10 +37,10 @@ export const ListarClientes = () => {
             <Container>
                 <div className='p-2'>
                     <div className='p-2'>
-                        <a href='/novo-cliente' className='btn btn-outline-primary btn-sm'>Adicionar novo cliente</a>
+                        <a href='/novo-cliente' className='btn btn-outline-primary btn-sm'>Adicionar novo produto</a>
                     </div>
                     <div>
-                        <h1>Visualizar Clientes</h1>
+                        <h1>Visualizar Produtos</h1>
                         {status.type == 'error' ? <Alert color='danger'> {status.message} </Alert> : ''}
                         <Table striped></Table>
                     </div>
@@ -50,28 +50,19 @@ export const ListarClientes = () => {
                         <tr>
                             <th>ID</th>
                             <th>Nome</th>
-                            <th>Endereço</th>
-                            <th>Cidade</th>
-                            <th>UF</th>
-                            <th>Nascimento</th>
-                            <th>Cliente desde</th>
-                            <th>Ação</th>
+                            <th>Descrição</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map(cli => (
-                            <tr key={cli.id}>
-                                <td>{cli.id}</td>
-                                <td>{cli.nome}</td>
-                                <td>{cli.endereco}</td>
-                                <td>{cli.cidade}</td>
-                                <td>{cli.uf}</td>
-                                <td>{cli.nascimento}</td>
-                                <td>{cli.createdAt}</td>
-                                <td className='text-center'><Link to={'/cliente/'+cli.id} 
+                        {data.map(pro => (
+                            <tr key={pro.id}>
+                                <td>{pro.id}</td>
+                                <td>{pro.nome}</td>
+                                <td>{pro.descricao}</td>
+                                <td className='text-center'><Link to={'/produto/'+pro.id} 
                                 className='btn btn-outline-primary btn-sm'>Consultar </Link></td>
 
-                                <td className='text-center'><Link to={'/editar-cliente/'+cli.id} 
+                                <td className='text-center'><Link to={'/editar-produto/'+pro.id} 
                                 className='btn btn-outline-warning btn-sm'>Editar</Link></td>
                                 
                                 <td className='text-center'><Link to='' 
