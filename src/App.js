@@ -7,8 +7,8 @@ import { ListarPedidos } from './views/Pedido/Listar';
 import { ListarServicos } from './views/Servico/Listar';
 import { Menu } from './components/Menu';
 import { Item } from './views/Servico/Item';
-import { AddCliente } from './views/Cliente/AddCliente';
-import { ListarProdutos } from './views/Produto/Listar';
+import { AddCliente } from './views/Cliente/Adicionar';
+import { AddServico } from './views/Servico/Adicionar';
 
 
 function App() {
@@ -21,9 +21,9 @@ function App() {
           <Route path='/listar-clientes' component={ListarClientes} />
           <Route path='/listar-pedidos' component={ListarPedidos} />
           <Route path='/listar-servicos' component={ListarServicos} />
-          <Route path='/listar-produtos' component={ListarProdutos}/>
           <Route path='/listar-pedido:id' component={Item} />
           <Route path='/novo-cliente' component={AddCliente} />
+          <Route path='/novo-servico' component={AddServico} />
         </Switch>
       </Router>
     </div>

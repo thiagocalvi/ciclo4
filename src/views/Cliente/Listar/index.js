@@ -33,10 +33,10 @@ export const ListarClientes = () => {
 
 
     return (
-        <div className=''>
+        <div>
             <Container>
                 <div className='p-2'>
-                    <div className='p-2'>
+                    <div>
                         <a href='/novo-cliente' className='btn btn-outline-primary btn-sm'>Adicionar novo cliente</a>
                     </div>
                     <div>
@@ -74,11 +74,10 @@ export const ListarClientes = () => {
                                 <td className='text-center'><Link to={'/editar-cliente/'+cli.id} 
                                 className='btn btn-outline-warning btn-sm'>Editar</Link></td>
                                 
-                                <td className='text-center'><Link to='' 
-                                clssName='btn btn-outline-danger btn-sm'>Excluir</Link></td>
+                                <td className='text-center'><Link to={'/excluir-cliente/'+cli.id} 
+                                className='btn btn-outline-danger btn-sm'>Excluir</Link></td>
                             </tr>
                         ))}
-
                     </tbody>
                 </Table>
             </Container>

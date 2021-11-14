@@ -1,11 +1,12 @@
 
 import axios from "axios";
-import { Input, Container, Form, FormGroup, Label, Button } from "reactstrap";
+import { useState } from "react";
+import { Input, Container, Form, FormGroup, Label, Button, Alert } from "reactstrap";
 import { api } from "../../../config";
 
 export const AddCliente = () => {
 
-    const [cliente, setCliente] = setCliente({
+    const [cliente, setCliente] = useState({
         nome: '',
         endereco: '',
         cidade: '',
@@ -13,18 +14,37 @@ export const AddCliente = () => {
         nascimento: ''
     });
 
-    const valorInput = e => setCliente({ ...cliente, [e.target.nome]: e.target.value });
+    const [status, setStatus] = useState({
+        type: '',
+        message: ''
+    });
+
+    const valorInput = e => setCliente({ ...cliente, [e.target.nome]: e.target.value })
 
     const cadCliente = async e => {
         e.preventDefault();
         const headers = {
             'Content-type': 'application/json'
         };
-        await axios.post(api + '/cliente', cliente, { headers })
+        await axios.post(api + '/novo-cliente', cliente, { headers })
             .then((response) => {
-                console.log(response.data.message);
+                if (response.data.error) {
+                    setStatus({
+                        type: 'error',
+                        message: response.data.message
+                    });
+                }
+                else{
+                    setStatus({
+                        type: 'success',
+                        message: response.data.message
+                    });
+                }
             }).catch(() => {
-                console.log('Erro: sem conexão com API');
+                setStatus({
+                    type: 'error',
+                    message: 'Erro: sem conexão com a API'
+                });
             });
     };
 
@@ -37,13 +57,15 @@ export const AddCliente = () => {
                     <h1>Novo cliente</h1>
                 </div>
                 <div>
+                    <hr className='m-1'/>
+                    {status.type === 'error' ? <Alert color='danger'>{status.message}</Alert> : ''}
+                    {status.type === 'success' ? <Alert color='success'>{status.message}</Alert> : ''}
                     <Form onSubmit={cadCliente}>
                         <FormGroup>
                             <Label for='nome'>
                                 Nome
                             </Label>
                             <Input
-                                id='nome'
                                 name='nome'
                                 type='text'
                                 onChange={valorInput}
@@ -54,7 +76,6 @@ export const AddCliente = () => {
                                 Endereço
                             </Label>
                             <Input
-                                id='endereco'
                                 name='endereco'
                                 placeholder=''
                                 type='text'
@@ -66,7 +87,6 @@ export const AddCliente = () => {
                                 Cidade
                             </Label>
                             <Input
-                                id='cidade'
                                 name='cidade'
                                 placeholder=''
                                 type='text'
@@ -78,7 +98,6 @@ export const AddCliente = () => {
                                 UF
                             </Label>
                             <Input
-                                id='uf'
                                 name='uf'
                                 type='text'
                                 onChange={valorInput}
@@ -89,7 +108,6 @@ export const AddCliente = () => {
                                 Data de Nascimento
                             </Label>
                             <Input
-                                id='nascimento'
                                 name='nascimento'
                                 type='date'
                                 onChange={valorInput}
@@ -97,11 +115,11 @@ export const AddCliente = () => {
                         </FormGroup>
                     </Form>
                 </div>
-                <div>
-                    <Button color='primery' outline type='submit'>
-                        CRIAR CLIENTE
+                <div className='m-auto'>
+                    <Button type='submit' color='success' onClick={cadCliente}>
+                        Criar Cliente
                     </Button>
-                    <Button type='reset' autline color='primery'>
+                    <Button type='reset' color='primary'>
                         Limpar
                     </Button>
                 </div>
