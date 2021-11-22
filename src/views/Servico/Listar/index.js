@@ -16,8 +16,6 @@ export const ListarServicos = () => {
     const getServicos = async () => {
         await axios.get(api + "/listar-servicos")
             .then((response) => {
-                // console.log(response.data.servicos);
-                // console.log(response.data);
                 setData(response.data.ser);
             }).catch(() => {
                 setStatus({
@@ -48,6 +46,7 @@ export const ListarServicos = () => {
                             <th>ID</th>
                             <th>Nome</th>
                             <th>Descrição</th>
+                            <th>Data de criação</th>
                             <th>Ação</th>
                         </tr>
                     </thead>
@@ -57,6 +56,8 @@ export const ListarServicos = () => {
                                 <td scope='row'>{ser.id}</td>
                                 <td>{ser.nome}</td>
                                 <td>{ser.descricao}</td>
+                                <td>{ser.createdAt}</td>
+
                                 <td className='text-center'><Link to={'/listar-pedidos/' + ser.id}
                                     className='btn btn-outline-primary btn-sm'>Consultar</Link>
                                 </td>

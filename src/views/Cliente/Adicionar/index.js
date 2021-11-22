@@ -34,7 +34,7 @@ export const AddCliente = () => {
                         message: response.data.message
                     });
                 }
-                else{
+                else {
                     setStatus({
                         type: 'success',
                         message: response.data.message
@@ -57,7 +57,7 @@ export const AddCliente = () => {
                     <h1>Novo cliente</h1>
                 </div>
                 <div>
-                    <hr className='m-1'/>
+                    <hr className='m-1' />
                     {status.type === 'error' ? <Alert color='danger'>{status.message}</Alert> : ''}
                     {status.type === 'success' ? <Alert color='success'>{status.message}</Alert> : ''}
                     <Form onSubmit={cadCliente}>
@@ -109,19 +109,21 @@ export const AddCliente = () => {
                             </Label>
                             <Input
                                 name='nascimento'
-                                type='date'
+                                type='text'
                                 onChange={valorInput}
                             />
                         </FormGroup>
+                        <FormGroup>
+                            <div className='m-auto'>
+                                <Button type='submit' color='success' onClick={cadCliente}>
+                                    Criar Cliente
+                                </Button>
+                                <Button type='reset' color='primary'>
+                                    Limpar
+                                </Button>
+                            </div>
+                        </FormGroup>
                     </Form>
-                </div>
-                <div className='m-auto'>
-                    <Button type='submit' color='success' onClick={cadCliente}>
-                        Criar Cliente
-                    </Button>
-                    <Button type='reset' color='primary'>
-                        Limpar
-                    </Button>
                 </div>
             </Container>
         </div>

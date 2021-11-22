@@ -5,6 +5,7 @@ import { Container, Table, Alert } from "reactstrap";
 import { api } from "../../../config";
 
 export const ListarPedidos = () => {
+
     const [data, setData] = useState([]);
 
     const [status, setStatus] = useState({
@@ -15,8 +16,8 @@ export const ListarPedidos = () => {
     const getPedidos = async () => {
         await axios.get(api + '/listar-pedidos')
             .then((response) => {
-                console.log(response.data.pedidos);
-                setData(response.data.pedidos);
+                console.log(response.data.ped);
+                setData(response.data.ped);
             }).catch(() => {
                 setStatus({
                     type: 'error',
@@ -29,7 +30,7 @@ export const ListarPedidos = () => {
         getPedidos();
     }, []);
     return (
-        <div className=''>
+        <div>
             <Container>
                 <div>
                     <h1>Visualizar Pedidos</h1>
@@ -39,13 +40,19 @@ export const ListarPedidos = () => {
                 <Table>
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>ID do Pedido</th>
+                            <th>ID do Cliente </th>
                             <th>Data do pedido</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <td>?</td>
-                        <td>?</td>
+                        {data.map(ped => (
+                            <tr key={ped.id}>
+                                <td>{ped.id}</td>
+                                <td>{ped.ClienteId}</td>
+                                <td>{ped.dataPedido}</td>
+                            </tr>
+                        ))}
                     </tbody>
                 </Table>
             </Container>

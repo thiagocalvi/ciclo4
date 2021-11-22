@@ -18,7 +18,7 @@ export const AddServico = () => {
             'Content-Type': 'application/json'
         }
 
-        await  axios.post(api+'/listar-servicos', servico, {headers})
+        await  axios.post(api+'/novo-servico', servico, {headers})
         .then((response)=>{
             console.log(response);
         }).catch(()=>{
@@ -45,7 +45,12 @@ export const AddServico = () => {
                             placeholder='Descrição do serviço' onChange={valorInput} />
                     </FormGroup>
                 </Form>
-                <Button type='submit' className='btn-success'>Cadastrar</Button>
+                <Button type='submit' color='success' onClick={cadServico}>
+                    Cadastrar
+                    </Button>
+                <Button type='reset' color='primary'>
+                    Limpar
+                    </Button>
             </div>
         </Container>
     )
