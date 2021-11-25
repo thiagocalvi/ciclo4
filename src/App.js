@@ -12,6 +12,7 @@ import { AddServico } from './views/Servico/Adicionar';
 import { EditarCliente } from './views/Cliente/Editar';
 import { ListarProdutos } from './views/Produto/Listar';
 import { ListarCompras } from './views/Compra/Listar';
+import { AddProduto } from './views/Produto/Adicionar';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path='/listar-pedido:id' component={Item} />
           <Route path='/novo-cliente' component={AddCliente} />
           <Route path='/novo-servico' component={AddServico} />
+          <Route path='/novo-produto' component={AddProduto} />
           <Route path='/editar-cliete/id' component={EditarCliente}/>
         </Switch>
       </Router>

@@ -51,6 +51,7 @@ export const ListarProdutos = () => {
                             <th>Nome</th>
                             <th>Descrição</th>
                             <th>Data de criação</th>
+                            <th>Ação</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,14 +61,12 @@ export const ListarProdutos = () => {
                                 <td>{pro.nome}</td>
                                 <td>{pro.descricao}</td>
                                 <td>{pro.createdAt}</td>
-                                {/* <td className='text-center'><Link to={'/cliente/'+cli.id} 
-                                className='btn btn-outline-primary btn-sm'>Consultar </Link></td>
-
-                                <td className='text-center'><Link to={'/editar-cliente/'+cli.id} 
-                                className='btn btn-outline-warning btn-sm'>Editar</Link></td>
-                                
-                                <td className='text-center'><Link to={'/excluir-cliente/'+cli.id} 
-                                className='btn btn-outline-danger btn-sm'>Excluir</Link></td> */}
+                                <td className='text-center'><Link to={'/editar-produto/' + pro.id}
+                                    className='btn btn-outline-warning btn-sm'>Editar</Link>
+                                </td>
+                                <td className='text-center'><Link to={'/excluir-produto/' + pro.id}
+                                    className='btn btn-outline-danger btn-sm'>Excluir</Link>
+                                </td>
                             </tr>
                         ))}
                     </tbody>

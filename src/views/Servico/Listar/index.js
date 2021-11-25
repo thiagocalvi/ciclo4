@@ -57,14 +57,9 @@ export const ListarServicos = () => {
                                 <td>{ser.nome}</td>
                                 <td>{ser.descricao}</td>
                                 <td>{ser.createdAt}</td>
-
-                                <td className='text-center'><Link to={'/listar-pedidos/' + ser.id}
-                                    className='btn btn-outline-primary btn-sm'>Consultar</Link>
-                                </td>
                                 <td className='text-center'><Link to={'/editar-servico/' + ser.id}
                                     className='btn btn-outline-warning btn-sm'>Editar</Link>
                                 </td>
-
                                 <td className='text-center'><Link to={'/excluir-servico/' + ser.id}
                                     className='btn btn-outline-danger btn-sm'>Excluir</Link>
                                 </td>
