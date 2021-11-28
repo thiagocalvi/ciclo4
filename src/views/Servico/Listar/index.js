@@ -26,6 +26,27 @@ export const ListarServicos = () => {
             });
     };
 
+    const delServicos = async (idServico) => {
+        console.log(idServico);
+
+        const headers = {
+            'Content-type': 'application/json'
+        }
+
+        await axios.delete(api + '/excluir-servico/' + idServico, { headers })
+            .then((response) => {
+                console.log(response.data.type);
+                console.log(response.data.message);
+                getServicos();
+            })
+            .catch(() => {
+                setStatus({
+                    type: 'error',
+                    message: 'Não foi ´possivel se conectar'
+                });
+            });
+    }
+
     useEffect(() => {
         getServicos();
     }, []);
@@ -60,10 +81,10 @@ export const ListarServicos = () => {
                                 <td className='text-center'><Link to={'/editar-servico/' + ser.id}
                                     className='btn btn-outline-warning btn-sm'>Editar</Link>
                                 </td>
-                                <td className='text-center'><Link to={'/excluir-servico/' + ser.id}
-                                    className='btn btn-outline-danger btn-sm'>Excluir</Link>
+                                <td className='text-center'>
+                                    <span className='btn btn-outline-danger btn-sm' onClick={() => delServicos(ser.id)}>Excluir</span>
                                 </td>
-                            </tr>
+                            </tr> 
                         ))}
                     </tbody>
                 </Table>
