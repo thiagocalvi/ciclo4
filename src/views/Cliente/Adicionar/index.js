@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import { useState } from "react";
 import { Input, Container, Form, FormGroup, Label, Button, Alert } from "reactstrap";
@@ -19,33 +18,37 @@ export const AddCliente = () => {
         message: ''
     });
 
-    const valorInput = e => setCliente({ ...cliente, [e.target.nome]: e.target.value })
+    const valorInput = e => setCliente({
+        ...cliente,
+        [e.target.nome]: e.target.value
+    });
 
     const cadCliente = async e => {
         e.preventDefault();
+
         const headers = {
-            'Content-type': 'application/json'
+            'Content-Type': 'application/json'
         };
         await axios.post(api + '/novo-cliente', cliente, { headers })
-            .then((response) => {
-                if (response.data.error) {
-                    setStatus({
-                        type: 'error',
-                        message: response.data.message
-                    });
-                }
-                else {
-                    setStatus({
-                        type: 'success',
-                        message: response.data.message
-                    });
-                }
-            }).catch(() => {
+        .then((response) => {
+            if (response.data.error) {
                 setStatus({
                     type: 'error',
-                    message: 'Erro: sem conexão com a API'
+                    message: response.data.message
                 });
+            }
+            else {
+                setStatus({
+                    type: 'success',
+                    message: 'Sucesso'
+                });
+            }
+        }).catch(() => {
+            setStatus({
+                type: 'error',
+                message: 'Erro: sem conexão com a API'
             });
+        });
     };
 
 
@@ -62,57 +65,29 @@ export const AddCliente = () => {
                     {status.type === 'success' ? <Alert color='success'>{status.message}</Alert> : ''}
                     <Form onSubmit={cadCliente}>
                         <FormGroup>
-                            <Label for='nome'>
-                                Nome
-                            </Label>
-                            <Input
-                                name='nome'
-                                type='text'
-                                onChange={valorInput}
-                            />
+                            <Label>Nome</Label>
+                            <Input name='nome' type='text' onChange={valorInput}/>
                         </FormGroup>
                         <FormGroup>
-                            <Label for='endereco'>
-                                Endereço
-                            </Label>
-                            <Input
-                                name='endereco'
-                                placeholder=''
-                                type='text'
-                                onChange={valorInput}
-                            />
+                            <Label>Endereço</Label>
+                            <Input name='endereco' type='text' onChange={valorInput}/>
                         </FormGroup>
+
                         <FormGroup>
-                            <Label for='cidade'>
-                                Cidade
-                            </Label>
-                            <Input
-                                name='cidade'
-                                placeholder=''
-                                type='text'
-                                onChange={valorInput}
-                            />
+                            <Label>Cidade</Label>
+                            <Input name='cidade' type='text' onChange={valorInput}/>
                         </FormGroup>
+
                         <FormGroup>
-                            <Label for='uf'>
-                                UF
-                            </Label>
-                            <Input
-                                name='uf'
-                                type='text'
-                                onChange={valorInput}
-                            />
+                            <Label>UF</Label>
+                            <Input name='uf' type='text' onChange={valorInput}/>
                         </FormGroup>
+
                         <FormGroup>
-                            <Label for='nascimento'>
-                                Data de Nascimento
-                            </Label>
-                            <Input
-                                name='nascimento'
-                                type='text'
-                                onChange={valorInput}
-                            />
+                            <Label>Data de Nascimento</Label>
+                            <Input name='nascimento' type='text' onChange={valorInput}/>
                         </FormGroup>
+
                         <FormGroup>
                             <div className='m-auto'>
                                 <Button type='submit' color='success' onClick={cadCliente}>

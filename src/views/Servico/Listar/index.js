@@ -8,6 +8,7 @@ import { api } from "../../../config";
 export const ListarServicos = () => {
 
     const [data, setData] = useState([]);
+
     const [status, setStatus] = useState({
         type: '',
         message: ''
@@ -16,6 +17,7 @@ export const ListarServicos = () => {
     const getServicos = async () => {
         await axios.get(api + "/listar-servicos")
             .then((response) => {
+                console.log(response.data.ser);
                 setData(response.data.ser);
             }).catch(() => {
                 setStatus({
@@ -42,7 +44,7 @@ export const ListarServicos = () => {
             .catch(() => {
                 setStatus({
                     type: 'error',
-                    message: 'Não foi ´possivel se conectar'
+                    message: 'Não foi possivel se conectar'
                 });
             });
     }
@@ -82,7 +84,7 @@ export const ListarServicos = () => {
                                     className='btn btn-outline-warning btn-sm'>Editar</Link>
                                 </td>
                                 <td className='text-center'>
-                                    <span className='btn btn-outline-danger btn-sm' onClick={() => delServicos(ser.id)}>Excluir</span>
+                                    <span className='btn btn-outline-danger btn-sm' onClick={ () => delServicos(ser.id)}>Excluir</span>
                                 </td>
                             </tr> 
                         ))}
