@@ -1,16 +1,16 @@
 import axios from "axios";
-import { useState } from "react";
-import { Input, Container, Form, FormGroup, Label, Button, Alert } from "reactstrap";
+import { useState } from "react/cjs/react.development";
+import { Alert, Button, Container, Form, FormGroup, Input, Label } from "reactstrap";
 import { api } from "../../../config";
 
 export const AddCliente = () => {
 
     const [cliente, setCliente] = useState({
         nome: '',
+        nascimento: '',
         endereco: '',
         cidade: '',
-        uf: '',
-        nascimento: ''
+        uf: ''
     });
 
     const [status, setStatus] = useState({
@@ -18,10 +18,7 @@ export const AddCliente = () => {
         message: ''
     });
 
-    const valorInput = e => setCliente({
-        ...cliente,
-        [e.target.nome]: e.target.value
-    });
+    const valorInput = e => setCliente({ ...cliente, [e.target.name]: e.target.value });
 
     const cadCliente = async e => {
         e.preventDefault();
@@ -29,78 +26,73 @@ export const AddCliente = () => {
         const headers = {
             'Content-Type': 'application/json'
         };
-        await axios.post(api + '/novo-cliente', cliente, { headers })
-        .then((response) => {
-            if (response.data.error) {
+
+        await axios.post(api + "/novo-cliente", cliente, { headers })
+            .then((response) => {
+                if (response.data.error) {
+                    setStatus({
+                        type: 'error',
+                        message: 'Sem conexão com a API.'
+                    });
+                }
+                else {
+                    setStatus({
+                        type: 'succes',
+                        message: 'Succes'
+                    })
+                };
+            })
+            .catch((erro) => {
                 setStatus({
                     type: 'error',
-                    message: response.data.message
-                });
-            }
-            else {
-                setStatus({
-                    type: 'success',
-                    message: 'Sucesso'
-                });
-            }
-        }).catch(() => {
-            setStatus({
-                type: 'error',
-                message: 'Erro: sem conexão com a API'
+                    message: 'Sem conexão com a API'
+                })
             });
-        });
     };
-
-
 
     return (
         <div>
             <Container>
                 <div className='d-flex'>
-                    <h1>Novo cliente</h1>
+                    <h1>Cadastrar Cliente</h1>
                 </div>
-                <div>
-                    <hr className='m-1' />
-                    {status.type === 'error' ? <Alert color='danger'>{status.message}</Alert> : ''}
-                    {status.type === 'success' ? <Alert color='success'>{status.message}</Alert> : ''}
-                    <Form onSubmit={cadCliente}>
-                        <FormGroup>
-                            <Label>Nome</Label>
-                            <Input name='nome' type='text' onChange={valorInput}/>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label>Endereço</Label>
-                            <Input name='endereco' type='text' onChange={valorInput}/>
-                        </FormGroup>
+                <hr />
+                {status.type === 'error' ? <Alert color='danger'>{status.message}</Alert> : ''}
+                {status.type === 'success' ? <Alert color='success'>{status.message}</Alert> : ''}
 
-                        <FormGroup>
-                            <Label>Cidade</Label>
-                            <Input name='cidade' type='text' onChange={valorInput}/>
-                        </FormGroup>
+                <Form className="p-2" onSubmit={cadCliente}>
+                    <FormGroup className="p-2">
+                        <Label>Nome</Label>
+                        <Input type="text" name="nome"
+                            placeholder="Nome do Cliente"
+                            onChange={valorInput} />
+                    </FormGroup>
+                    <FormGroup className="p-2">
+                        <Label>Nascimento</Label>
+                        <Input type="date" name="nascimento"
+                            onChange={valorInput} />
+                    </FormGroup>
+                    <FormGroup className="p-2">
+                        <Label>Endereço</Label>
+                        <Input type="text" name="endereco" placeholder="Endereço"
+                            onChange={valorInput} />
+                    </FormGroup>
+                    <FormGroup className="p-2">
+                        <Label>UF</Label>
+                        <Input type="text" name="uf" placeholder="UF"       
+                            onChange={valorInput} />
+                    </FormGroup>
+                    <FormGroup className="p-2">
+                        <Label>Cidade</Label>
+                        <Input type="text" name="cidade" placeholder="Cidade"
+                            onChange={valorInput} />
+                    </FormGroup>
+                    <Button type="submit" outline color="success">Cadastrar</Button>
+                    <Button type="reset" outline color='primary'>Limpar</Button>
+                </Form>
 
-                        <FormGroup>
-                            <Label>UF</Label>
-                            <Input name='uf' type='text' onChange={valorInput}/>
-                        </FormGroup>
-
-                        <FormGroup>
-                            <Label>Data de Nascimento</Label>
-                            <Input name='nascimento' type='text' onChange={valorInput}/>
-                        </FormGroup>
-
-                        <FormGroup>
-                            <div className='m-auto'>
-                                <Button type='submit' color='success' onClick={cadCliente}>
-                                    Criar Cliente
-                                </Button>
-                                <Button type='reset' color='primary'>
-                                    Limpar
-                                </Button>
-                            </div>
-                        </FormGroup>
-                    </Form>
-                </div>
             </Container>
+
         </div>
-    );
-};
+    )
+}

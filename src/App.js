@@ -9,7 +9,7 @@ import { Menu } from './components/Menu';
 import { Item } from './views/Servico/Item';
 import { AddCliente } from './views/Cliente/Adicionar';
 import { AddServico } from './views/Servico/Adicionar';
-import { EditarCliente } from './views/Cliente/Editar';
+import { EdtCliente } from './views/Cliente/Editar';
 import { ListarProdutos } from './views/Produto/Listar';
 import { ListarCompras } from './views/Compra/Listar';
 import { AddProduto } from './views/Produto/Adicionar';
@@ -32,7 +32,7 @@ function App() {
           <Route path='/novo-cliente' component={AddCliente} />
           <Route path='/novo-servico' component={AddServico} />
           <Route path='/novo-produto' component={AddProduto} />
-          <Route path='/editar-cliete/id' component={EditarCliente}/>
+          <Route path='/editar-cliete:id' component={EdtCliente}/>
         </Switch>
       </Router>
     </div>

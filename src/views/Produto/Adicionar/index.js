@@ -1,7 +1,8 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState } from "react/cjs/react.development";
 import { Alert, Button, Container, Form, FormGroup, Input, Label } from "reactstrap"
 import { api } from "../../../config";
+
 export const AddProduto = () => {
 
     const [produto, setProduto] = useState({
@@ -9,82 +10,40 @@ export const AddProduto = () => {
         descricao: ''
     });
 
-    const [status, setStatus] = useState({
-        type: '',
-        message: ''
-    });
-
-    const valorInput = e => setProduto({ ...produto, [e.target.nome]: e.target.value })
+    const valorInput = e => setProduto({ ...produto, [e.target.name]: e.target.value })
 
     const cadProduto = async e => {
         e.preventDefault();
+
         const headers = {
-            'Content-type': 'application/json'
-        };
-        await axios.post(api + '/novo-produto', produto, { headers })
+            'Content-Type': 'application/json'
+        }
+
+        await axios.post(api + "/novo-produto", produto, { headers })
             .then((response) => {
-                if (response.data.error) {
-                    setStatus({
-                        type: 'error',
-                        message: response.data.message
-                    });
-                }
-                else {
-                    setStatus({
-                        type: 'success',
-                        message: response.data.message
-                    });
-                }
+                console.log(response.data.message)
             }).catch(() => {
-                setStatus({
-                    type: 'error',
-                    message: 'Erro: sem conexão com a API'
-                });
+                console.log("Sem conexão com a API")
             });
     };
 
-    return(
+    return (
         <div>
             <Container>
                 <div className='d-flex'>
                     <h1>Novo produto</h1>
                 </div>
-                <div>
-                    <hr className='m-1'/>
-                    {status.type === 'error' ? <Alert color='danger'>{status.message}</Alert> : ''}
-                    {status.type === 'success' ? <Alert color='success'>{status.message}</Alert> : ''}
-                </div>
-                <Form onSubmit={cadProduto}>
-                    <FormGroup>
-                        <Label for='nome'>
-                            Nome
-                        </Label>
-                        <Input
-                            name='nome'
-                            type='text'
-                            onChange={valorInput}
-                        />
+                <Form className="p-2" onSubmit={cadProduto}>
+                    <FormGroup className="p-2">
+                        <Label>Nome</Label>
+                        <Input name='nome' type='text' placeholder="Nome do Produto" onChange={valorInput} />
                     </FormGroup>
-                    <FormGroup>
-                        <Label for='descricao'>
-                            Descrição
-                        </Label>
-                        <Input
-                            name='descricao'
-                            type='text'
-                            onChange={valorInput}
-                        />
+                    <FormGroup className="p-2">
+                        <Label>Descrição</Label>
+                        <Input name='descricao' type='text' placeholder="Descriçao do Produto" onChange={valorInput} />
                     </FormGroup>
-                    <FormGroup>
-                            <div className='m-auto'>
-                                <Button type='submit' color='success' onClick={cadProduto}>
-                                    Adicionar Produto
-                                </Button>
-                                <Button type='reset' color='primary'>
-                                    Limpar
-                                </Button>
-                            </div>
-                        </FormGroup>
+                    <Button type="submit" outline color="success">Cadastrar</Button>
+                    <Button type="reset" outline color="primary">Limpar</Button>
                 </Form>
             </Container>
         </div>

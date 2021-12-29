@@ -27,6 +27,27 @@ export const ListarProdutos = () => {
             });
     };
 
+    const delProduto = async (idProduto) => {
+        console.log(idProduto);
+
+        const headers = {
+            'Content-type': 'application/json'
+        }
+
+        await axios.delete(api + '/excluir-produto/' + idProduto, { headers })
+            .then((response) => {
+                console.log(response.data.type);
+                console.log(response.data.message);
+                getProdutos();
+            })
+            .catch(() => {
+                setStatus({
+                    type: 'error',
+                    message: 'Não foi possivel se conectar'
+                });
+            });
+    }
+
     useEffect(() => {
         getProdutos();
     }, []);
@@ -64,8 +85,8 @@ export const ListarProdutos = () => {
                                 <td className='text-center'><Link to={'/editar-produto/' + pro.id}
                                     className='btn btn-outline-warning btn-sm'>Editar</Link>
                                 </td>
-                                <td className='text-center'><Link to={'/excluir-produto/' + pro.id}
-                                    className='btn btn-outline-danger btn-sm'>Excluir</Link>
+                                <td className='text-center'>
+                                    <span className='btn btn-outline-danger btn-sm' onClick={ () => delProduto(pro.id)}>Excluir</span>
                                 </td>
                             </tr>
                         ))}

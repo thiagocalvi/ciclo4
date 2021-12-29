@@ -26,7 +26,6 @@ export const ListarCompras = () => {
                 })
             });
     };
-
     useEffect(() => {
         getCompras();
     }, []);
@@ -44,9 +43,9 @@ export const ListarCompras = () => {
                 <Table>
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>ID Compra</th>
                             <th>ID Cliente</th>
-                            <th>Data de criação</th>
+                            <th>Data da Compra</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,14 +54,6 @@ export const ListarCompras = () => {
                                 <td>{cp.id}</td>
                                 <td>{cp.ClienteId}</td>
                                 <td>{cp.data}</td>
-                                {/* <td className='text-center'><Link to={'/cliente/'+cli.id} 
-                                className='btn btn-outline-primary btn-sm'>Consultar </Link></td>
-
-                                <td className='text-center'><Link to={'/editar-cliente/'+cli.id} 
-                                className='btn btn-outline-warning btn-sm'>Editar</Link></td>
-                                
-                                <td className='text-center'><Link to={'/excluir-cliente/'+cli.id} 
-                                className='btn btn-outline-danger btn-sm'>Excluir</Link></td> */}
                             </tr>
                         ))}
                     </tbody>

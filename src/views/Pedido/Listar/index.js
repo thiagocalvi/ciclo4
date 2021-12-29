@@ -42,7 +42,7 @@ export const ListarPedidos = () => {
                         <tr>
                             <th>ID do Pedido</th>
                             <th>ID do Cliente </th>
-                            <th>Data do pedido</th>
+                            <th>Data do Pedido</th>
                         </tr>
                     </thead>
                     <tbody>
