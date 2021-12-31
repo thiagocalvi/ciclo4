@@ -2,19 +2,28 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { Home } from './views/Home';
-import { ListarClientes } from './views/Cliente/Listar';
-import { ListarPedidos } from './views/Pedido/Listar';
-import { ListarServicos } from './views/Servico/Listar';
 import { Menu } from './components/Menu';
-import { Item } from './views/Servico/Item';
+
+//cliente
+import { ListarClientes } from './views/Cliente/Listar';
 import { AddCliente } from './views/Cliente/Adicionar';
-import { AddServico } from './views/Servico/Adicionar';
 import { EdtCliente } from './views/Cliente/Editar';
-import { ListarProdutos } from './views/Produto/Listar';
+
+//pedido
+import { ListarPedidos } from './views/Pedido/Listar';
+
+//compra
 import { ListarCompras } from './views/Compra/Listar';
+
+//serviço
+import { ListarServicos } from './views/Servico/Listar';
+import { AddServico } from './views/Servico/Adicionar';
+
+//produto
+import { ListarProdutos } from './views/Produto/Listar';
 import { AddProduto } from './views/Produto/Adicionar';
 
-
+import { Item } from './views/Servico/Item';
 
 function App() {
   return (
@@ -32,7 +41,7 @@ function App() {
           <Route path='/novo-cliente' component={AddCliente} />
           <Route path='/novo-servico' component={AddServico} />
           <Route path='/novo-produto' component={AddProduto} />
-          <Route path='/editar-cliete:id' component={EdtCliente}/>
+          <Route path='/editar-cliete/:id' component={EdtCliente}/>
         </Switch>
       </Router>
     </div>
