@@ -19,11 +19,13 @@ import { ListarCompras } from './views/Compra/Listar';
 import { ListarServicos } from './views/Servico/Listar';
 import { AddServico } from './views/Servico/Adicionar';
 
+import { Item } from './views/Servico/Item';
+
 //produto
 import { ListarProdutos } from './views/Produto/Listar';
 import { AddProduto } from './views/Produto/Adicionar';
 
-import { Item } from './views/Servico/Item';
+
 
 function App() {
   return (

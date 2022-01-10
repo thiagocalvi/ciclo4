@@ -65,30 +65,30 @@ export const AddCliente = () => {
                         <Label>Nome</Label>
                         <Input type="text" name="nome"
                             placeholder="Nome do Cliente"
-                            onChange={valorInput} />
+                            onChange={valorInput} required />
                     </FormGroup>
                     <FormGroup className="p-2">
                         <Label>Nascimento</Label>
                         <Input type="date" name="nascimento"
-                            onChange={valorInput} />
+                            onChange={valorInput} required />
                     </FormGroup>
                     <FormGroup className="p-2">
                         <Label>Endereço</Label>
                         <Input type="text" name="endereco" placeholder="Endereço"
-                            onChange={valorInput} />
+                            onChange={valorInput} required/>
                     </FormGroup>
                     <FormGroup className="p-2">
                         <Label>UF</Label>
                         <Input type="text" name="uf" placeholder="UF"       
-                            onChange={valorInput} />
+                            onChange={valorInput} required/>
                     </FormGroup>
                     <FormGroup className="p-2">
                         <Label>Cidade</Label>
                         <Input type="text" name="cidade" placeholder="Cidade"
-                            onChange={valorInput} />
+                            onChange={valorInput} required/>
                     </FormGroup>
-                    <Button type="submit" outline color="success">Cadastrar</Button>
-                    <Button type="reset" outline color='primary'>Limpar</Button>
+                    <Button type="submit" className="m-2" outline color="success">Cadastrar</Button>
+                    <Button type="reset"  outline color='primary'>Limpar</Button>
                 </Form>
 
             </Container>
