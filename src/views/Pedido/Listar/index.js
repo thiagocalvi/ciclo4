@@ -27,6 +27,7 @@ export const ListarPedidos = () => {
     };
 
     useEffect(() => {
+        document.title = "Pedidos"
         getPedidos();
     }, []);
     return (

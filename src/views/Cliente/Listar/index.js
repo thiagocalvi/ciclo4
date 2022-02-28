@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Container, Table, Alert } from "reactstrap";
 
+
 import { api } from "../../../config";
 
 export const ListarClientes = () => {
+
 
     const [data, setData] = useState([]);
 
@@ -18,15 +20,16 @@ export const ListarClientes = () => {
         await axios.get(api + '/listar-clientes')
             .then((response) => {
                 console.log(response.data.cli);
-                setData(response.data.cli);
+                setData(response.data.cli); 
             }).catch(() => {
                 setStatus({
                     type: 'error',
-                    message: 'Erro: sem conexão com a API'
+                    message: 'Sem conexão com a API'
                 })
             });
     };
 
+    
     const delClientes = async (idCliente) => {
         console.log(idCliente);
 
@@ -43,12 +46,13 @@ export const ListarClientes = () => {
             .catch(() => {
                 setStatus({
                     type: 'error',
-                    message: 'Não foi ´possivel se conectar'
+                    message: 'Não foi possivel se conectar'
                 });
             });
     }
 
     useEffect(() => {
+        document.title = "Clientes"
         getClientes();
     }, []);
 
@@ -56,9 +60,9 @@ export const ListarClientes = () => {
     return (
         <div>
             <Container>
-                <div className='p-2'>
+                <div className='p-2 '>
                     <div>
-                        <a href='/novo-cliente' className='btn btn-outline-primary btn-sm'>Adicionar novo cliente</a>
+                        <a href='/novo-cliente' className='btn btn-outline-primary btn-sm '>Adicionar novo cliente</a>
                     </div>
                     <div>
                         <h1>Visualizar Clientes</h1>

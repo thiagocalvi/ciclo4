@@ -35,6 +35,9 @@ export const ListarCompras = () => {
             <Container>
                 <div className='p-2'>
                     <div>
+                        <a href='/compra' className='btn btn-outline-primary btn-sm '>Nova compra</a>
+                    </div>
+                    <div>
                         <h1>Visualizar Compras</h1>
                         {status.type == 'error' ? <Alert color='danger'> {status.message} </Alert> : ''}
                         <Table striped></Table>

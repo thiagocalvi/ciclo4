@@ -50,6 +50,7 @@ export const ListarServicos = () => {
     }
 
     useEffect(() => {
+        document.title = "Serviços"
         getServicos();
     }, []);
 
